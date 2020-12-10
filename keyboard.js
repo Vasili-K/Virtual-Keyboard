@@ -7,7 +7,6 @@ const Keyboard = {
 
   eventHandlers: {
     oninput: null,
-    onclose: null,
   },
 
   properties: {
@@ -20,7 +19,7 @@ const Keyboard = {
     this.elements.keysContainer = document.createElement("div");
 
     this.elements.main.classList.add("keyboard", "keyboard--hidden");
-    this.elements.main.classList.add("keyboard__keys");
+    this.elements.keysContainer.classList.add("keyboard__keys");
     this.elements.keysContainer.appendChild(this._createKeys());
 
     this.elements.keys = this.elements.keysContainer.querySelectorAll(
@@ -157,7 +156,6 @@ const Keyboard = {
 
           keyElement.addEventListener("click", () => {
             this.close();
-            this._triggerEvent("onclose");
           });
 
           break;
@@ -202,17 +200,14 @@ const Keyboard = {
     }
   },
 
-  open(initialValue, oninput, onclose) {
+  open(initialValue, oninput) {
     this.properties.value = initialValue || "";
     this.eventHandlers.oninput = oninput;
-    this.eventHandlers.onclose = onclose;
     this.elements.main.classList.remove("keyboard--hidden");
   },
 
   close() {
     this.properties.value = "";
-    this.eventHandlers.oninput = oninput;
-    this.eventHandlers.onclose = onclose;
     this.elements.main.classList.add("keyboard--hidden");
   },
 };
